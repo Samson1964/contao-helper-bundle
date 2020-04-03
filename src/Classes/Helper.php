@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Schachbulle\ContaoHelperBundle\Classes;
 
@@ -25,13 +25,13 @@ class Helper
 				throw new \Exception(sprintf('Invalid argument "%s"', $strKey));
 				break;
 		}
-	} 
-	
+	}
+
 	static function setDate($varValue)
 	{
 		return self::putDate($varValue);
 	}
-	
+
 	/**
 	 * Datumswert aus Datenbank umwandeln
 	 * @param mixed
@@ -62,7 +62,7 @@ class Helper
 			}
 			return $temp;
 		}
-		
+
 		return $varValue;
 
 	}
@@ -120,28 +120,47 @@ class Helper
 		return $string;
 	}
 
-    /**
-     * Check input for existing only of digits (numbers)
-     * @author Tim Boormans <info@directwebsolutions.nl>
-     * @param $digit
-     * @return bool
-     */
-    static function is_digit($digit) 
-    {
-        if(is_int($digit)) 
-        {
-            return true; // 123 
-        } 
-        elseif(is_string($digit)) 
-        {
-            return ctype_digit($digit); // true "123"
-        } 
-        else 
-        {
-            // booleans, floats and others
-            return false;
-        }
-    }
-}
+	/**
+	 * Holt aus der Bildunterschrift den String mit dem Copyright
+	 * @param mixed
+	 * @return mixed
+	 */
+	static function getCopyright($string)
+	{
+		static $begrenzer = array('[', ']');
 
-?>
+		// Nach Copyright per Regex suchen
+		$found = preg_match("/(\[.+\])/",$string,$treffer,PREG_OFFSET_CAPTURE);
+		if($found)
+		{
+			$cpstr = str_replace($begrenzer, '', $treffer[0][0]); // Begrenzer entfernen und Copyright zurückgeben
+		}
+		else $cpstr = ''; // Kein Copyright
+
+		return $cpstr;
+	}
+
+	/**
+	 * Check input for existing only of digits (numbers)
+	 * @author Tim Boormans <info@directwebsolutions.nl>
+	 * @param $digit
+	 * @return bool
+	 */
+	static function is_digit($digit)
+	{
+		if(is_int($digit))
+		{
+			return true; // 123
+		}
+		elseif(is_string($digit))
+		{
+			return ctype_digit($digit); // true "123"
+		}
+		else
+		{
+			// booleans, floats and others
+			return false;
+		}
+	}
+
+}
