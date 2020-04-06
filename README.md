@@ -23,9 +23,10 @@ Falls die Klasse in einer Erweiterung angewendet wird, so muß ggfs. ein Eintrag
 
 ```php
 <?php
-    // Standardcache aktivieren, das Standardverzeichnis ist system/cache/samson
-    // Die Schlüssel werden in der Standardcachedatei "default" abgelegt
-    $cache = new Schachbulle\ContaoHelperBundle\Classes\Cache();
+    // Standardcache aktivieren, das Standardverzeichnis ist system/cache/schachbulle
+    // Die Schlüssel werden in der Standardcachedatei "default" abgelegt, wenn kein Parameter
+    // (hier 'Name') angegeben wird
+    $cache = new \Schachbulle\ContaoHelperBundle\Classes\Cache('Name');
 
     // String erstellen, es sind aber beliebige Datentypen möglich - auch Objekte und Arrays
     $result = "Hallo";
@@ -58,7 +59,7 @@ Falls die Klasse in einer Erweiterung angewendet wird, so muß ggfs. ein Eintrag
 
     // Cache mit einem neuen Dateinamen 'Test' generieren
     // Die Schlüssel werden jetzt in dieser Datei verwaltet.
-    $cache2 = new Samson\Helper\Cache('Test');
+    $cache2 = new \Schachbulle\ContaoHelperBundle\Classes\Cache('Test');
 
     // Möglich ist der Wechsel des Cachenamens auch so, ohne ein neues Objekt anzulegen
     $cache->setCache('Test');

@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 0.0.4 (2020-04-06)
+
+Fix: Anpassung der Cache-Klasse bzgl. Cache-Ordner (system/cache/schachbulle)
+
 ## Version 0.0.3 (2020-04-06)
 
 Add: Cache-Klasse
