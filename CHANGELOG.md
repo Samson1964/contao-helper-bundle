@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 0.0.5 (2020-05-05)
+
+Add: Funktion sortArrayByFields in Helper-Klasse
+
 ## Version 0.0.4 (2020-04-06)
 
 Fix: Anpassung der Cache-Klasse bzgl. Cache-Ordner (system/cache/schachbulle)

@@ -163,4 +163,50 @@ class Helper
 		}
 	}
 
+	/**
+	 * Mehrdimensionales Array bequem sortieren
+	 * $sorted = sortArrayByFields(
+	 *     $data,
+	 *     array(
+	 *         'jahrgang' => SORT_DESC,
+	 *         'nachname' => array(SORT_ASC, SORT_STRING)
+	 *     )
+	 * );
+	 */
+	static function sortArrayByFields($arr, $fields)
+	{
+		$sortFields = array();
+		$args       = array();
+
+		foreach ($arr as $key => $row)
+		{
+			foreach ($fields as $field => $order)
+			{
+				$sortFields[$field][$key] = $row[$field];
+			}
+		}
+
+		foreach ($fields as $field => $order)
+		{
+			$args[] = $sortFields[$field];
+
+			if (is_array($order))
+			{
+				foreach ($order as $pt)
+				{
+					$args[$pt];
+				}
+			}
+			else
+			{
+				$args[] = $order;
+			}
+		}
+
+		$args[] = &$arr;
+
+		call_user_func_array('array_multisort', $args);
+
+		return $arr;
+	}
 }
