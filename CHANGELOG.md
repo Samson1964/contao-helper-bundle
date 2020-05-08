@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 0.0.6 (2020-05-08)
+
+Add: Formular-Klasse Form
+
 ## Version 0.0.5 (2020-05-05)
 
 Add: Funktion sortArrayByFields in Helper-Klasse
