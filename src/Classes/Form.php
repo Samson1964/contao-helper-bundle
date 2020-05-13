@@ -27,6 +27,10 @@ class Form
 
 		$this->fields[] = $arrParam['name'];
 
+		// Wenn POST-Daten da sind, dann als value eintragen, ansonsten Formularvorgabewert nehmen
+		if(\Input::post($arrParam['name'])) $value = \Input::post($arrParam['name']);
+		else $value = $arrParam['value'];
+
 		switch($arrParam['typ'])
 		{
 			case 'hidden':
@@ -35,7 +39,7 @@ class Form
 			case 'text':
 				$string = '<div class="widget widget-text '.$arrParam['class'].'">';
 				$string .= '<label for="'.$arrParam['name'].'">'.$arrParam['label'].'##mandatory##</label>';
-				$string .= '<input type="text" name="'.$arrParam['name'].'" id="'.$arrParam['name'].'" class="text" value="'.$arrParam['value'].'"##required##>';
+				$string .= '<input type="text" name="'.$arrParam['name'].'" id="'.$arrParam['name'].'" class="text" value="'.$value.'"##required##>';
 				$string .= '</div>';
 				break;
 			case 'explanation':
@@ -49,7 +53,7 @@ class Form
 			case 'textarea':
 				$string .= '<div class="widget widget-textarea">';
 				$string .= '<label for="'.$arrParam['name'].'">'.$arrParam['label'].'##mandatory##</label>';
-				$string .= '<textarea name="'.$arrParam['name'].'" id="'.$arrParam['name'].'" class="textarea" rows="'.$arrParam['rows'].'" cols="'.$arrParam['cols'].'"##required##>'.$arrParam['value'].'</textarea>';
+				$string .= '<textarea name="'.$arrParam['name'].'" id="'.$arrParam['name'].'" class="textarea" rows="'.$arrParam['rows'].'" cols="'.$arrParam['cols'].'"##required##>'.$value.'</textarea>';
 				$string .= '</div>';
 				break;
 			case 'select':

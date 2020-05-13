@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 0.0.7 (2020-05-13)
+
+Add: Form.php erweitert um die Ausgabe von Feldwerten
+
 ## Version 0.0.6 (2020-05-08)
 
 Add: Formular-Klasse Form
