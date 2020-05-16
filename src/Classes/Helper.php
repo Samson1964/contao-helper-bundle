@@ -209,4 +209,65 @@ class Helper
 
 		return $arr;
 	}
+
+	static function is_utf8($str)
+	{
+		$strlen = strlen($str);
+		for($i=0; $i<$strlen; $i++)
+		{
+			$ord = ord($str[$i]);
+			if($ord < 0x80) continue; // 0bbbbbbb
+			elseif(($ord&0xE0)===0xC0 && $ord>0xC1) $n = 1; // 110bbbbb (exkl C0-C1)
+			elseif(($ord&0xF0)===0xE0) $n = 2; // 1110bbbb
+			elseif(($ord&0xF8)===0xF0 && $ord<0xF5) $n = 3; // 11110bbb (exkl F5-FF)
+			else return false; // ungültiges UTF-8-Zeichen
+			for($c=0; $c<$n; $c++) // $n Folgebytes? // 10bbbbbb
+				if(++$i===$strlen || (ord($str[$i])&0xC0)!==0x80)
+					return false; // ungültiges UTF-8-Zeichen
+		}
+		return true; // kein ungültiges UTF-8-Zeichen gefunden
+	}
+
+	function ANSI_gross($eingabe)
+	{
+	# --------------------------------------------------------
+	# Wandelt eingabe in Großbuchstaben um, ersetzt dabei
+	# Sonderzeichen in A-Z (z.B. é in E)
+	# Ausgabe entspricht dann Feldname + '_g'
+	# --------------------------------------------------------
+		$mapping = array
+			(32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+			 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+			 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,
+			 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63,
+			 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79,
+			 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95,
+			 96, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79,
+			 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,123,124,125,126,127,
+			 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+			 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+			 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+			 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32,
+			 65, 65, 65, 65,196, 65, 32, 67, 69, 69, 69, 69, 73, 73, 73, 73,
+			 32, 78, 79, 79, 79, 79,214, 32, 32, 85, 85, 85,220, 89, 32,223,
+			 65, 65, 65, 65,196,197,198, 67, 69, 69, 69, 69, 73, 73, 73, 73,
+			 32, 78, 79, 79, 79, 79,214, 32,216, 85, 85, 85,220, 89, 32, 89);
+		$ausgabe = '';
+		for ($i=0; $i<strlen($eingabe); $i++)
+			$ausgabe .= chr($mapping[ord(substr($eingabe, $i, 1))]);
+		
+		$umlaute = array('Ä'=>'AE', 'Æ'=>'AE', 'Å'=>'AU', 'Ö'=>'OE', 'Ø'=>'OE', 'Ü'=>'UE', 'ß'=>'SS');
+		$ausgabe = strtr($ausgabe, $umlaute);
+		return $ausgabe;
+	}
+
+	function ANSItoUTF8($string)
+	{
+		$suchen = array('Â½', 'Ã¤');
+		$ersetzen = array('½', 'ä');
+
+		$neu = utf8_decode($string);
+		//$string = str_replace($suchen, $ersetzen, $string);
+		return "|$string|$neu|";
+	}
 }
