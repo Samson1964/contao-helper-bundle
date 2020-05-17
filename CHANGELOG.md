@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 0.0.9 (2020-05-17)
+
+* Add: Funktion NameDrehen in Helper-Klasse
+
 ## Version 0.0.8 (2020-05-16)
 
 * Add: Funktion is_utf8 in Helper-Klasse

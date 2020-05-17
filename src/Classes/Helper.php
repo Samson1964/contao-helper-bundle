@@ -270,4 +270,17 @@ class Helper
 		//$string = str_replace($suchen, $ersetzen, $string);
 		return "|$string|$neu|";
 	}
+
+	function NameDrehen($string)
+	{
+		// Konvertiert Namen der Form Nachname,Vorname,Titel nach Titel Vorname Name
+		list($nname,$vname,$titel) = explode(',', $string);
+		$result = $titel;
+		if($result) $result .= ' '.$vname;
+		else $result = $vname;
+		if($result) $result .= ' '.$nname;
+		else $result = $nname;
+		return $result;
+	}
+
 }
