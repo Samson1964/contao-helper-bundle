@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.0.0 (2020-05-22)
+
+* Add: Funktion StringToArray (aus chesstable -> ArrayAufloesen)
+
 ## Version 0.0.9 (2020-05-17)
 
 * Add: Funktion NameDrehen in Helper-Klasse

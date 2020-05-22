@@ -283,4 +283,35 @@ class Helper
 		return $result;
 	}
 
+	/**
+	 * Funktion ArrayAufloesen
+	 *
+	 * @param     string          Bsp.: '1,3-7,8-9,34'
+	 *
+	 * @return    array           Bsp.: array('1','3','4','5','6','7','8','9','34')
+	 */
+	function StringToArray($string)
+	{
+		$array = explode(',', $string);
+
+		$newArray = array();
+		foreach($array as $item)
+		{
+			if(ctype_digit($item))
+			{
+				// Integerzahl direkt übernehmen
+				$newArray[] = $item;
+			}
+			else
+			{
+				// String in der Form "Zahl-Zahl" auflösen
+				$temp = explode("-", $item);
+				for($x = $temp[0]; $x <= $temp[1]; $x++)
+				{
+					$newArray[] = $x;
+				}
+			}
+		}
+		return $newArray;
+	}
 }
