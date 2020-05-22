@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.1.0 (2020-05-22)
+
+* Add: Funktion StringKuerzen
+
 ## Version 1.0.0 (2020-05-22)
 
 * Add: Funktion StringToArray (aus chesstable -> ArrayAufloesen)

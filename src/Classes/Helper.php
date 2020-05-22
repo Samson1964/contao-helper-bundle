@@ -314,4 +314,24 @@ class Helper
 		}
 		return $newArray;
 	}
+
+	/**
+	 * Hilfsfunktion: 
+	 * Kürzt einen String auf x Zeichen
+	 *
+	 * @return string
+	 */
+	function StringKuerzen($value, $anzahl)
+	{
+		if(mb_detect_encoding($value,'UTF-8, ISO-8859-1') === 'UTF-8')
+		{
+			# Der Turniername ist in UTF-8 kodiert und muß vor der Kürzung umgewandelt werden
+			$value = utf8_decode($value);
+		}
+
+		// Gekürzten Turniernamen generieren und wieder in UTF-8 umwandeln
+		$neu = (strlen($value) > $anzahl) ? substr($value,0,$anzahl) : $value;
+		return utf8_encode($neu);
+
+	}
 }
