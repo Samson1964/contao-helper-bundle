@@ -16,20 +16,72 @@ namespace Schachbulle\ContaoHelperBundle\Classes;
 class Tags extends \Frontend
 {
 
-	public function Alter($strTag)
+	public function Schachbund($strTag)
 	{
 		$arrSplit = explode('::', $strTag);
 
-		if($arrSplit[0] != 'alter' && $arrSplit[0] != 'cache_alter') return false; // Nicht unser Inserttag
-
-		// Parameter angegeben?
-		if(isset($arrSplit[1]))
+		// Inserttag {{alter::TT.MM.JJJJ}}
+		// Liefert zu einem Geburtstag das Alter in Jahren
+		if($arrSplit[0] == 'alter' || $arrSplit[0] == 'cache_alter')
 		{
-			return self::getAlter($arrSplit[1]);
+			// Parameter angegeben?
+			if(isset($arrSplit[1]))
+			{
+				return self::getAlter($arrSplit[1]);
+			}
+			else
+			{
+				return 'Geburtstag fehlt!';
+			}
+		}
+		// Inserttag {{dwz::id}}
+		// Liefert zu einer DeWIS-ID die aktuelle DWZ
+		elseif($arrSplit[0] == 'dwz' || $arrSplit[0] == 'cache_dwz')
+		{
+			// Parameter angegeben?
+			if(isset($arrSplit[1]))
+			{
+				$result = self::getPlayer($arrSplit[1]);
+				return $result['dwz'];
+			}
+			else
+			{
+				return '';
+			}
+		}
+		// Inserttag {{elo::id}}
+		// Liefert zu einer DeWIS-ID die aktuelle Elo
+		elseif($arrSplit[0] == 'elo' || $arrSplit[0] == 'cache_elo')
+		{
+			// Parameter angegeben?
+			if(isset($arrSplit[1]))
+			{
+				$result = self::getPlayer($arrSplit[1]);
+				return $result['elo'];
+			}
+			else
+			{
+				return '';
+			}
+		}
+		// Inserttag {{ftitel::id}}
+		// Liefert zu einer DeWIS-ID den aktuellen FIDE-Titel
+		elseif($arrSplit[0] == 'ftitel' || $arrSplit[0] == 'cache_ftitel')
+		{
+			// Parameter angegeben?
+			if(isset($arrSplit[1]))
+			{
+				$result = self::getPlayer($arrSplit[1]);
+				return $result['titel'];
+			}
+			else
+			{
+				return '';
+			}
 		}
 		else
 		{
-			return 'Geburtstag fehlt!';
+			return false; // Tag nicht dabei
 		}
 
 	}
@@ -42,4 +94,26 @@ class Tags extends \Frontend
 		return $alter;
 	}
 
+	function getPlayer($id)
+	{
+		try
+		{
+			$client = new \SOAPClient( "https://dwz.svw.info/services/files/dewis.wsdl" );
+			$result = $client->tournamentCardForId($id);
+			$dwz = $result->member->rating;
+			$elo = $result->member->elo;
+			$titel = $result->member->fideTitle;
+			return array
+			(
+				'dwz'   => $dwz,
+				'elo'   => $elo,
+				'titel' => $titel
+			);
+		}
+		catch (SOAPFault $f)
+		{
+			print $f->faultstring;
+		}
+		return array();
+	}
 }

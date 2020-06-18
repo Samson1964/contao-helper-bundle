@@ -1,5 +1,11 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.2.1 (2020-06-18)
+
+* Add: Insert-Tag dwz
+* Add: Insert-Tag elo
+* Add: Insert-Tag ftitel
+
 ## Version 1.2.0 (2020-06-18)
 
 * Add: Insert-Tag alter

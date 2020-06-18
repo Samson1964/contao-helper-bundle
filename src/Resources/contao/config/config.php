@@ -11,4 +11,4 @@
  * @copyright Frank Hoppe 2014
  */
  
-$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('Schachbulle\ContaoHelperBundle\Classes\Tags', 'Alter');
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('Schachbulle\ContaoHelperBundle\Classes\Tags', 'Schachbund');
