@@ -1,5 +1,10 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.2.0 (2020-06-18)
+
+* Add: Insert-Tag alter
+* de.yml entfernt
+
 ## Version 1.1.0 (2020-05-22)
 
 * Add: Funktion StringKuerzen
