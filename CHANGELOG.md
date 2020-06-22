@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.2.2 (2020-06-22)
+
+* Add: Insert-Tag verein
+
 ## Version 1.2.1 (2020-06-18)
 
 * Add: Insert-Tag dwz

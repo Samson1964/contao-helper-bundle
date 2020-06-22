@@ -79,6 +79,21 @@ class Tags extends \Frontend
 				return '';
 			}
 		}
+		// Inserttag {{ftitel::id}}
+		// Liefert zu einer DeWIS-ID den aktuellen Verein
+		elseif($arrSplit[0] == 'verein' || $arrSplit[0] == 'cache_verein')
+		{
+			// Parameter angegeben?
+			if(isset($arrSplit[1]))
+			{
+				$result = self::getPlayer($arrSplit[1]);
+				return $result['verein'];
+			}
+			else
+			{
+				return '';
+			}
+		}
 		else
 		{
 			return false; // Tag nicht dabei
@@ -100,14 +115,19 @@ class Tags extends \Frontend
 		{
 			$client = new \SOAPClient( "https://dwz.svw.info/services/files/dewis.wsdl" );
 			$result = $client->tournamentCardForId($id);
+			//echo "<pre>";
+			//print_r($result);
+			//echo "</pre>";
 			$dwz = $result->member->rating;
 			$elo = $result->member->elo;
 			$titel = $result->member->fideTitle;
+			$verein = $result->memberships[0]->club;
 			return array
 			(
-				'dwz'   => $dwz,
-				'elo'   => $elo,
-				'titel' => $titel
+				'dwz'    => $dwz,
+				'elo'    => $elo,
+				'titel'  => $titel,
+				'verein' => $verein
 			);
 		}
 		catch (SOAPFault $f)
