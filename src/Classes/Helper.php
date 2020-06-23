@@ -175,6 +175,8 @@ class Helper
 	 */
 	static function sortArrayByFields($arr, $fields)
 	{
+		if(!is_array($arr)) return $arr; // Kein Array, Daten unverändert zurückgeben
+
 		$sortFields = array();
 		$args       = array();
 

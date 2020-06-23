@@ -1,5 +1,10 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.2.3 (2020-06-23)
+
+* Fix: PHP Warning: Invalid argument supplied for foreach() in contao-helper-bundle/src/Classes/Helper.php on line 181
+* Fix: PHP Warning: array_multisort(): Argument #1 is expected to be an array or a sort flag in contao-helper-bundle/src/Classes/Helper.php on line 208
+
 ## Version 1.2.2 (2020-06-22)
 
 * Add: Insert-Tag verein
