@@ -94,6 +94,56 @@ class Tags extends \Frontend
 				return '';
 			}
 		}
+		// Inserttag {{figur::Name|Größe}}
+		// Zeigt eine Schachfigur an
+		elseif($arrSplit[0] == 'figur' || $arrSplit[0] == 'cache_figur')
+		{
+			// Parameter angegeben?
+			if(isset($arrSplit[1]))
+			{
+				$figur = explode('|', $arrSplit[1]); // Name und Größe trennen
+				switch($figur[0])
+				{
+					case 'wB':
+						$datei = 'wP.png'; break;
+					case 'wT':
+						$datei = 'wR.png'; break;
+					case 'wD':
+						$datei = 'wQ.png'; break;
+					case 'wK':
+						$datei = 'wK.png'; break;
+					case 'wS':
+						$datei = 'wN.png'; break;
+					case 'wL':
+						$datei = 'wB.png'; break;
+
+					case 'sB':
+						$datei = 'bP.png'; break;
+					case 'sT':
+						$datei = 'bR.png'; break;
+					case 'sD':
+						$datei = 'bQ.png'; break;
+					case 'sK':
+						$datei = 'bK.png'; break;
+					case 'sS':
+						$datei = 'bN.png'; break;
+					case 'sL':
+						$datei = 'bB.png'; break;
+
+					default:
+						$datei = $figur[0].'_ungueltig';
+				}
+				// Größe zuweisen
+				if($figur[1]) $groesse = $figur[1].'px';
+				else $groesse = '16px';
+				// Grafik zurückgeben
+				return '<img src="bundles/contaohelper/chess/'.$datei.'" width="'.$groesse.'">';
+			}
+			else
+			{
+				return '';
+			}
+		}
 		else
 		{
 			return false; // Tag nicht dabei

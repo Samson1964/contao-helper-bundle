@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.3.0 (2020-06-23)
+
+* Add: Insert-Tag für Figuren
+
 ## Version 1.2.3 (2020-06-23)
 
 * Fix: PHP Warning: Invalid argument supplied for foreach() in contao-helper-bundle/src/Classes/Helper.php on line 181
