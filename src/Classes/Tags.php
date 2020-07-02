@@ -98,7 +98,6 @@ class Tags extends \Frontend
 		// Zeigt eine Schachfigur an
 		elseif($arrSplit[0] == 'figur' || $arrSplit[0] == 'cache_figur')
 		{
-			print_r($arrSplit);
 			// Parameter angegeben?
 			if(isset($arrSplit[1]))
 			{
@@ -134,7 +133,6 @@ class Tags extends \Frontend
 					default:
 						$datei = $figur[0].'_ungueltig';
 				}
-				print_r($figur);
 				// Größe zuweisen
 				$groesse = $figur[1] ? $figur[1].'px' : '16px';
 				// Grafik zurückgeben

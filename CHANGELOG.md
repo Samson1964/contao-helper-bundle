@@ -1,12 +1,16 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.3.2 (2020-07-02)
+
+* Fix: Debug-Zeilen entfernt und UTF8 bei changelog
+
 ## Version 1.3.1 (2020-07-02)
 
-* Fix: Insert-Tag für Figuren - / statt | als Trennzeichen, da | intern von Contao verwendet wird
+* Fix: Insert-Tag fÃ¼r Figuren - / statt | als Trennzeichen, da | intern von Contao verwendet wird
 
 ## Version 1.3.0 (2020-06-23)
 
-* Add: Insert-Tag für Figuren
+* Add: Insert-Tag fÃ¼r Figuren
 
 ## Version 1.2.3 (2020-06-23)
 
