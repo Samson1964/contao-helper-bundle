@@ -136,7 +136,7 @@ class Tags extends \Frontend
 				// Größe zuweisen
 				$groesse = $figur[1] ? $figur[1].'px' : '16px';
 				// Grafik zurückgeben
-				return '<img src="bundles/contaohelper/chess/'.$datei.'" width="'.$groesse.'">';
+				return '<img src="bundles/contaohelper/chess/'.$datei.'" width="'.$groesse.'" style="vertical-align: text-bottom;">';
 			}
 			else
 			{

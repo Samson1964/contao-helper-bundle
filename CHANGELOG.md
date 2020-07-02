@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.3.3 (2020-07-02)
+
+* Fix: Insert-Tag Figuren - Ausrichtung text-bottom
+
 ## Version 1.3.2 (2020-07-02)
 
 * Fix: Debug-Zeilen entfernt und UTF8 bei changelog
