@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.3.1 (2020-07-02)
+
+* Fix: Insert-Tag für Figuren - / statt | als Trennzeichen, da | intern von Contao verwendet wird
+
 ## Version 1.3.0 (2020-06-23)
 
 * Add: Insert-Tag für Figuren

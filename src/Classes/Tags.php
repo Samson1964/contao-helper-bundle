@@ -98,10 +98,11 @@ class Tags extends \Frontend
 		// Zeigt eine Schachfigur an
 		elseif($arrSplit[0] == 'figur' || $arrSplit[0] == 'cache_figur')
 		{
+			print_r($arrSplit);
 			// Parameter angegeben?
 			if(isset($arrSplit[1]))
 			{
-				$figur = explode('|', $arrSplit[1]); // Name und Größe trennen
+				$figur = explode('/', $arrSplit[1]); // Name und Größe trennen
 				switch($figur[0])
 				{
 					case 'wB':
@@ -133,9 +134,9 @@ class Tags extends \Frontend
 					default:
 						$datei = $figur[0].'_ungueltig';
 				}
+				print_r($figur);
 				// Größe zuweisen
-				if($figur[1]) $groesse = $figur[1].'px';
-				else $groesse = '16px';
+				$groesse = $figur[1] ? $figur[1].'px' : '16px';
 				// Grafik zurückgeben
 				return '<img src="bundles/contaohelper/chess/'.$datei.'" width="'.$groesse.'">';
 			}
