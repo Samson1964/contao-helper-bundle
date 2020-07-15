@@ -34,8 +34,8 @@ class Helper
 
 	/**
 	 * Datumswert aus Datenbank umwandeln
-	 * @param mixed
-	 * @return mixed
+	 * @param $varValue       int         JJJJMMTT / JJJJMM00 / JJJJ0000 / 0
+	 * @return                string      TT.MM.JJJJ / MM.JJJJ / JJJJ / false
 	 */
 	static function getDate($varValue)
 	{
@@ -46,31 +46,43 @@ class Helper
 			switch($laenge)
 			{
 				case 8: // JJJJMMTT
-					$temp = substr($varValue,6,2).'.'.substr($varValue,4,2).'.'.substr($varValue,0,4);
+					$tag = (int)substr($varValue,6,2);
+					$monat = (int)substr($varValue,4,2);
+					$jahr = (int)substr($varValue,0,4);
 					break;
 				case 6: // JJJJMM
-					$temp = substr($varValue,4,2).'.'.substr($varValue,0,4);
+					$tag = 0;
+					$monat = (int)substr($varValue,4,2);
+					$jahr = (int)substr($varValue,0,4);
 					break;
 				case 4: // JJJJ
-					$temp = $varValue;
+					$tag = 0;
+					$monat = 0;
+					$jahr = (int)$varValue;
 					break;
 				case 1: // Auf 0 prüfen
-					$temp = ($varValue == '0') ? '' : $varValue;
+					$tag = 0;
+					$monat = 0;
+					$jahr = 0;
 					break;
 				default: // anderer Wert
-					$temp = $varValue;
+					return $varValue;
 			}
+			// Werte in Datum TT.MM.JJJJ, MM.JJJJ oder JJJJ umwandeln
+			$temp = $jahr ? substr('0000'.$jahr,-4) : $temp; // JJJJ
+			$temp = $monat ? substr('00'.$monat,-2).'.'.$temp : $temp; // MM
+			$temp = $tag ? substr('00'.$tag,-2).'.'.$temp : $temp; // TT
 			return $temp;
 		}
 
-		return $varValue;
+		return $varValue; // Eingabewert ausgeben
 
 	}
 
 	/**
 	 * Datumswert für Datenbank umwandeln
-	 * @param mixed
-	 * @return mixed
+	 * @param $varValue       string      TT.MM.JJJJ / MM.JJJJ / JJJJ / anderer Wert
+	 * @return                int         JJJJMMTT / JJJJMM00 / JJJJ0000 / 0
 	 */
 	static function putDate($varValue)
 	{
@@ -79,13 +91,13 @@ class Helper
 		switch($laenge)
 		{
 			case 10: // TT.MM.JJJJ
-				$temp = substr($varValue,6,4).substr($varValue,3,2).substr($varValue,0,2);
+				$temp = (int)substr($varValue,6,4).substr($varValue,3,2).substr($varValue,0,2);
 				break;
 			case 7: // MM.JJJJ
-				$temp = substr($varValue,3,4).substr($varValue,0,2);
+				$temp = (int)substr($varValue,3,4).substr($varValue,0,2).'00';
 				break;
 			case 4: // JJJJ
-				$temp = $varValue;
+				$temp = (int)$varValue.'0000';
 				break;
 			default: // anderer Wert
 				$temp = 0;

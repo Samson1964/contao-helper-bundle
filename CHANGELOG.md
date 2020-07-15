@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.3.4 (2020-07-15)
+
+* getDate und putDate verbessert
+
 ## Version 1.3.3 (2020-07-02)
 
 * Fix: Insert-Tag Figuren - Ausrichtung text-bottom
