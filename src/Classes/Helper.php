@@ -5,6 +5,22 @@ namespace Schachbulle\ContaoHelperBundle\Classes;
 class Helper
 {
 
+	protected static $monate = array
+	(
+		1  => 'Januar',
+		2  => 'Februar',
+		3  => 'März',
+		4  => 'April',
+		5  => 'Mai',
+		6  => 'Juni',
+		7  => 'Juli',
+		8  => 'August',
+		9  => 'September',
+		10 => 'Oktober',
+		11 => 'November',
+		12 => 'Dezember'
+	);
+
 	/**
 	 * Set an object property
 	 *
@@ -103,6 +119,34 @@ class Helper
 				$temp = 0;
 		}
 
+		return $temp;
+	}
+
+	/**
+	 * Datumswert JJJJMMTT / JJJJMM / JJJJ umwandeln (mit Monatsname)
+	 * @param mixed
+	 * @return mixed
+	 */
+	static function getDateString($varValue)
+	{
+		$datum = self::getDate($varValue);
+		$laenge = strlen($datum);
+		$temp = '';
+
+		switch($laenge)
+		{
+			case 10: // TT.MM.JJJJ
+				$temp = (substr($datum,0,2)+0).'. '.self::$monate[substr($datum,3,2)+0].' '.substr($datum,6,4);
+				break;
+			case 7: // MM.JJJJ
+				$temp = self::$monate[substr($datum,0,2)+0].' '.substr($datum,3,4);
+				break;
+			case 4: // JJJJ
+				$temp = $datum;
+				break;
+			default: // anderer Wert
+				$temp = $varValue;
+		}
 		return $temp;
 	}
 
