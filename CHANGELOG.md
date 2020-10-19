@@ -1,5 +1,11 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.3.6 (2020-10-19)
+
+* Change: Insert-Tag verein verfeinert - Autom. Kürzen des Vereinsnamens, sowie Begrenzung auf x Zeichen
+* Change: Insert-Tag ftitel verfeinert - Option lang hinzugefügt, um Titel auszuschreiben
+* Fix: Tags.php in UTF8 codiert
+
 ## Version 1.3.5 (2020-09-28)
 
 * Add: Helper-Funktion getDateString, um kompatibel mit Chronik-Bundle zu bleiben

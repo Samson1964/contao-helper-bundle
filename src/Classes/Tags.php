@@ -72,14 +72,31 @@ class Tags extends \Frontend
 			if(isset($arrSplit[1]))
 			{
 				$result = self::getPlayer($arrSplit[1]);
-				return $result['titel'];
+				$titel = $result['titel'];
+				// Lange Version des Titel ausgeben, wenn Parameter lang gesetzt ist
+				if(isset($arrSplit[2]) && $arrSplit[2] = 'lang')
+				{
+					switch($titel)
+					{
+						case 'GM': $titel = 'GroÃŸmeister'; break;
+						case 'WGM': $titel = 'GroÃŸmeisterin'; break;
+						case 'IM': $titel = 'Internationaler Meister'; break;
+						case 'WIM': $titel = 'Internationale Meisterin'; break;
+						case 'FM': $titel = 'FIDE-Meister'; break;
+						case 'WFM': $titel = 'FIDE-Meisterin'; break;
+						case 'CM': $titel = 'Kandidatenmeister'; break;
+						case 'WCM': $titel = 'Kandidatenmeisterin'; break;
+						default:
+					}
+				}
+				return $titel;
 			}
 			else
 			{
 				return '';
 			}
 		}
-		// Inserttag {{ftitel::id}}
+		// Inserttag {{verein::id|LÃ¤nge}}
 		// Liefert zu einer DeWIS-ID den aktuellen Verein
 		elseif($arrSplit[0] == 'verein' || $arrSplit[0] == 'cache_verein')
 		{
@@ -87,21 +104,28 @@ class Tags extends \Frontend
 			if(isset($arrSplit[1]))
 			{
 				$result = self::getPlayer($arrSplit[1]);
-				return $result['verein'];
+				$verein = $result['verein'];
+				// Vereinsname kÃ¼rzen
+				$search  = array('Schachverein', 'SABT ', 'SAbt ', 'Schachclub', 'Schachklub', 'Schachfreunde', ' e.V.', ' eV');
+				$replace = array('SV', '', '', 'SC', 'SK', 'SF', '', '');
+				$verein = str_replace($search, $replace, $verein);
+				// Vereinsname auf LÃ¤nge trimmen, wenn gewÃ¼nscht
+				if($arrSplit[2]) $verein = substr($verein, 0, $arrSplit[2]);
+				return $verein;
 			}
 			else
 			{
 				return '';
 			}
 		}
-		// Inserttag {{figur::Name|Größe}}
+		// Inserttag {{figur::Name|GrÃ¶ÃŸe}}
 		// Zeigt eine Schachfigur an
 		elseif($arrSplit[0] == 'figur' || $arrSplit[0] == 'cache_figur')
 		{
 			// Parameter angegeben?
 			if(isset($arrSplit[1]))
 			{
-				$figur = explode('/', $arrSplit[1]); // Name und Größe trennen
+				$figur = explode('/', $arrSplit[1]); // Name und GrÃ¶ÃŸe trennen
 				switch($figur[0])
 				{
 					case 'wB':
@@ -133,9 +157,9 @@ class Tags extends \Frontend
 					default:
 						$datei = $figur[0].'_ungueltig';
 				}
-				// Größe zuweisen
+				// GrÃ¶ÃŸe zuweisen
 				$groesse = $figur[1] ? $figur[1].'px' : '16px';
-				// Grafik zurückgeben
+				// Grafik zurÃ¼ckgeben
 				return '<img src="bundles/contaohelper/chess/'.$datei.'" width="'.$groesse.'" style="vertical-align: text-bottom;">';
 			}
 			else
