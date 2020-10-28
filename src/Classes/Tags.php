@@ -105,10 +105,20 @@ class Tags extends \Frontend
 			{
 				$result = self::getPlayer($arrSplit[1]);
 				$verein = $result['verein'];
+
 				// Vereinsname kürzen
-				$search  = array('Schachverein', 'SABT ', 'SAbt ', 'Schachclub', 'Schachklub', 'Schachfreunde', ' e.V.', ' eV');
-				$replace = array('SV', '', '', 'SC', 'SK', 'SF', '', '');
+				$replaces = (array)unserialize($GLOBALS['TL_CONFIG']['insert_verein_replaces']); // Ersetzungen aus Einstellungen laden
+				// + durch Leerzeichen ersetzen und Zielarrays füllen
+				$search = array();
+				$replace = array();
+				for($x = 0; $x < count($replaces); $x++)
+				{
+					$search[] = str_replace('+', ' ', $replaces[$x]['search']);
+					$replace[] = str_replace('+', ' ', $replaces[$x]['replace']);
+				}
+				// Ersetzungen ausführen
 				$verein = str_replace($search, $replace, $verein);
+				
 				// Vereinsname auf Länge trimmen, wenn gewünscht
 				if($arrSplit[2]) $verein = substr($verein, 0, $arrSplit[2]);
 				return $verein;

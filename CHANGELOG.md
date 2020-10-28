@@ -1,5 +1,11 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.4.0 (2020-10-28)
+
+* Change: Verfeinerung Insert-Tag verein aus Version 1.3.6 - Autom. Kürzen des Vereinsnamens entfernt
+* Neu in den Voreinstellungen: Ersetzungen, die für System -> Einstellungen vorgegeben werden
+* Neu beim Insert-Tag verein: Weitere Ersetzungen können unter System -> Einstellungen konfiguriert werden
+
 ## Version 1.3.6 (2020-10-19)
 
 * Change: Insert-Tag verein verfeinert - Autom. Kürzen des Vereinsnamens, sowie Begrenzung auf x Zeichen
