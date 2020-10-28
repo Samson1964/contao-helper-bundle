@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.4.1 (2020-10-28)
+
+* Fix Insert-Tag verein: Ersetzungen werden jetzt nicht nach Groß- und Kleinschreibung unterschieden
+
 ## Version 1.4.0 (2020-10-28)
 
 * Change: Verfeinerung Insert-Tag verein aus Version 1.3.6 - Autom. Kürzen des Vereinsnamens entfernt

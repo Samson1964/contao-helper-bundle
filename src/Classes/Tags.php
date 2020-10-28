@@ -116,8 +116,8 @@ class Tags extends \Frontend
 					$search[] = str_replace('+', ' ', $replaces[$x]['search']);
 					$replace[] = str_replace('+', ' ', $replaces[$x]['replace']);
 				}
-				// Ersetzungen ausführen
-				$verein = str_replace($search, $replace, $verein);
+				// Ersetzungen ausführen, ohne Rücksicht Groß- und Kleinschreibung
+				$verein = str_ireplace($search, $replace, $verein);
 				
 				// Vereinsname auf Länge trimmen, wenn gewünscht
 				if($arrSplit[2]) $verein = substr($verein, 0, $arrSplit[2]);
