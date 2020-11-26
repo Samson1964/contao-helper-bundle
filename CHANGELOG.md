@@ -1,5 +1,10 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.5.0 (2020-11-26)
+
+* Add: Funktion getEventdate (aus Samson/Helper übernommen)
+* Fix: getEventdate mit falscher Anzeige bei gleichem Start- und Endetag
+
 ## Version 1.4.1 (2020-10-28)
 
 * Fix Insert-Tag verein: Ersetzungen werden jetzt nicht nach Groß- und Kleinschreibung unterschieden

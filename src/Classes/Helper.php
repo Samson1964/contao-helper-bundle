@@ -43,6 +43,73 @@ class Helper
 		}
 	}
 
+	/**
+	 * Datumswert JJJJMMTT / JJJJMM / JJJJ umwandeln (mit Monatsname)
+	 * @param mixed
+	 * @return mixed
+	 */
+	static function getEventdate($startdate = 0, $enddate = 0)
+	{
+	
+		// Starttag und Endetag vergleichen
+		if($startdate && $enddate)
+		{
+			if($startdate == $enddate)
+			{
+				// Start- und Endetag sind gleich
+				return date("d.m.Y",$startdate);
+			}
+
+			$start[0] = date("d",$startdate); // Starttag
+			$start[1] = date("m",$startdate); // Startmonat
+			$start[2] = date("Y",$startdate); // Startjahr
+			$ende[0] = date("d",$enddate); // Endetag
+			$ende[1] = date("m",$enddate); // Endemonat
+			$ende[2] = date("Y",$enddate); // Endejahr
+			if($start[2] == $ende[2]) 
+			{
+				// gleiches Jahr
+				$temp[0] = "";
+				$temp[1] = $ende[2];
+			}
+			else
+			{
+				// unterschiedliches Jahr
+				$temp[0] = $start[2];
+				$temp[1] = $ende[2];
+			}
+			if($start[1] == $ende[1]) 
+			{
+				// gleicher Monat
+				$temp[1] = $ende[1].".".$temp[1];
+			}
+			else
+			{
+				// unterschiedlicher Monat
+				$temp[0] = $start[1].".".$temp[0];
+				$temp[1] = $ende[1].".".$temp[1];
+			}
+			if($start[0] == $ende[0]) 
+			{
+				// gleicher Tag
+				$temp[1] = $ende[0].".".$temp[1];
+			}
+			else
+			{
+				// unterschiedlicher Tag
+				$temp[0] = $start[0].".".$temp[0];
+				$temp[1] = $ende[0].".".$temp[1];
+			}
+			return $temp[0]." - ".$temp[1];
+		}
+		else
+		{
+			// Endetag ist nicht gesetzt
+			return date("d.m.Y",$startdate);
+		}
+	}
+
+
 	static function setDate($varValue)
 	{
 		return self::putDate($varValue);
