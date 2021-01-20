@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.5.1 (2021-01-20)
+
+* Add: Uhrzeitausgabe in Helper-Funktion getEventdate
+
 ## Version 1.5.0 (2020-11-26)
 
 * Add: Funktion getEventdate (aus Samson/Helper übernommen)

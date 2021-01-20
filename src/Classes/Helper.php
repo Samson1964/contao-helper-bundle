@@ -45,19 +45,29 @@ class Helper
 
 	/**
 	 * Datumswert JJJJMMTT / JJJJMM / JJJJ umwandeln (mit Monatsname)
-	 * @param mixed
-	 * @return mixed
+	 * @param integer       $startdate      Unix-Zeitstempel des Startdatums
+	 * @param integer       $enddate        Unix-Zeitstempel des Endedatums
+	 * @param boolean       $addtime        Anfangsuhrzeit gesetzt ja/nein
+	 * @param integer       $starttime      Anfangsuhrzeit
+	 * @return string
 	 */
-	static function getEventdate($startdate = 0, $enddate = 0)
+	static function getEventdate($startdate = 0, $enddate = 0, $addtime = false, $starttime = 0)
 	{
-	
+
 		// Starttag und Endetag vergleichen
 		if($startdate && $enddate)
 		{
 			if($startdate == $enddate)
 			{
 				// Start- und Endetag sind gleich
-				return date("d.m.Y",$startdate);
+				$content = date("d.m.Y",$startdate);
+
+				// Uhrzeit gesetzt?
+				if($addtime)
+				{
+					$content .= ' '.date('H:i', $starttime);
+				}
+				return $content;
 			}
 
 			$start[0] = date("d",$startdate); // Starttag
@@ -100,13 +110,22 @@ class Helper
 				$temp[0] = $start[0].".".$temp[0];
 				$temp[1] = $ende[0].".".$temp[1];
 			}
-			return $temp[0]." - ".$temp[1];
+			$content = $temp[0]." - ".$temp[1];
 		}
 		else
 		{
 			// Endetag ist nicht gesetzt
-			return date("d.m.Y",$startdate);
+			$content = date("d.m.Y",$startdate);
 		}
+
+		// Uhrzeit gesetzt?
+		if($addtime)
+		{
+			$content .= ' '.date('H:i', $starttime);
+		}
+		
+		return $content;
+		
 	}
 
 
@@ -299,7 +318,7 @@ class Helper
 	static function sortArrayByFields($arr, $fields)
 	{
 		if(!is_array($arr)) return $arr; // Kein Array, Daten unverändert zurückgeben
-
+		
 		$sortFields = array();
 		$args       = array();
 
