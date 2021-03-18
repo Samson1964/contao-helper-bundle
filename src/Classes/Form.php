@@ -39,21 +39,21 @@ class Form
 			case 'text':
 				$string = '<div class="widget widget-text '.$arrParam['class'].'">';
 				$string .= '<label for="'.$arrParam['name'].'">'.$arrParam['label'].'##mandatory##</label>';
-				$string .= '<input type="text" name="'.$arrParam['name'].'" id="'.$arrParam['name'].'" class="text" value="'.$value.'"##required##>';
+				$string .= '<input type="text" name="'.$arrParam['name'].'" id="'.$arrParam['name'].'" class="text '.$arrParam['class']. '" value="'.$value.'"##required##>';
 				$string .= '</div>';
 				break;
 			case 'explanation':
-				$string = '<div class="widget widget-explanation explanation">'.$arrParam['label'].'</div>';
+				$string = '<div id="'.$arrParam['name']. '" class="widget widget-explanation explanation '.$arrParam['class']. '">'.$arrParam['label'].'</div>';
 				break;
 			case 'submit':
 				$string = '<div class="widget widget-submit">';
-				$string .= '<button type="submit" id="'.$arrParam['name'].'" class="submit">'.$arrParam['label'].'</button>';
+				$string .= '<button type="submit" id="'.$arrParam['name'].'" class="submit '.$arrParam['class']. '">'.$arrParam['label'].'</button>';
 				$string .= '</div>';
 				break;
 			case 'textarea':
 				$string .= '<div class="widget widget-textarea">';
 				$string .= '<label for="'.$arrParam['name'].'">'.$arrParam['label'].'##mandatory##</label>';
-				$string .= '<textarea name="'.$arrParam['name'].'" id="'.$arrParam['name'].'" class="textarea" rows="'.$arrParam['rows'].'" cols="'.$arrParam['cols'].'"##required##>'.$value.'</textarea>';
+				$string .= '<textarea name="'.$arrParam['name'].'" id="'.$arrParam['name'].'" class="textarea '.$arrParam['class']. '" rows="'.$arrParam['rows'].'" cols="'.$arrParam['cols'].'"##required##>'.$value.'</textarea>';
 				$string .= '</div>';
 				break;
 			case 'select':
@@ -78,7 +78,7 @@ class Form
 					foreach($arrParam['options'] as $key => $value)
 					{
 						$string .= '<li><label>';
-						$string .= '<input type="checkbox" name="'.$arrParam['name'].'[]" class="checkbox" value="'.$key.'">';
+						$string .= '<input type="checkbox" name="'.$arrParam['name'].'[]" class="checkbox '.$arrParam['class']. '" value="'.$key.'">';
 						$string .= $value.'</label></li>';
 					}
 				}

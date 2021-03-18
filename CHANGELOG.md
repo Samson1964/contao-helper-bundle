@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.5.2 (2021-03-18)
+
+* Add: Classes/Form.php - id und class bei allen Elementen, auch explanation
+
 ## Version 1.5.1 (2021-01-20)
 
 * Add: Uhrzeitausgabe in Helper-Funktion getEventdate
