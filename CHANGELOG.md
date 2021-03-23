@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.5.3 (2021-03-23)
+
+* Fix: Classes/Tags.php - SOAPClient-Aufruf ersetzt durch aktuellen Aufruf aus contao-dewis-bundle
+
 ## Version 1.5.2 (2021-03-18)
 
 * Add: Classes/Form.php - id und class bei allen Elementen, auch explanation
