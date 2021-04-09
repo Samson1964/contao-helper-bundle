@@ -124,7 +124,7 @@ class Helper
 			$startzeit = date('H:i', $starttime);
 			$endezeit = date('H:i', $endtime);
 			$uhrzeitstring = date('H:i', $starttime);
-			if($endezeit && ($endezeit != $startzeit))
+			if($endezeit && ($endezeit != $startzeit) && $endezeit != '01:00')
 			{
 				$uhrzeitstring .= ' - '.date('H:i', $endtime);
 			}

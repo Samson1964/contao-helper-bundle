@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.5.5 (2021-04-09)
+
+* Fix: Classes/Helper.php - Funktion getEventdate: Endezeit bei Domainfactory korrekt, bei Hetzner 01:00 - gepatcht
+
 ## Version 1.5.4 (2021-04-09)
 
 * Fix: Classes/Helper.php - Funktion getEventdate: CSS-Klassen für Datum und Uhrzeit und Trennzeichen ergänzt
