@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.5.4 (2021-04-09)
+
+* Fix: Classes/Helper.php - Funktion getEventdate: CSS-Klassen für Datum und Uhrzeit und Trennzeichen ergänzt
+
 ## Version 1.5.3 (2021-03-23)
 
 * Fix: Classes/Tags.php - SOAPClient-Aufruf ersetzt durch aktuellen Aufruf aus contao-dewis-bundle

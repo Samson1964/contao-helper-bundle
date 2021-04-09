@@ -44,86 +44,94 @@ class Helper
 	}
 
 	/**
-	 * Datumswert JJJJMMTT / JJJJMM / JJJJ umwandeln (mit Monatsname)
 	 * @param integer       $startdate      Unix-Zeitstempel des Startdatums
 	 * @param integer       $enddate        Unix-Zeitstempel des Endedatums
-	 * @param boolean       $addtime        Anfangsuhrzeit gesetzt ja/nein
-	 * @param integer       $starttime      Anfangsuhrzeit
+	 * @param boolean       $addtime        Uhrzeit gesetzt ja/nein
+	 * @param integer       $starttime      Uhrzeit Terminanfang als Unix-Zeitstempel
+	 * @param integer       $endtime        Uhrzeit Terminende als Unix-Zeitstempel
+	 * @param stringr       $delimiter      Trennzeichen zwischen Datum und Uhrzeit
 	 * @return string
 	 */
-	static function getEventdate($startdate = 0, $enddate = 0, $addtime = false, $starttime = 0)
+	static function getEventdate($startdate = 0, $enddate = 0, $addtime = false, $starttime = 0, $endtime = 0, $delimiter = ',')
 	{
 
-		// Starttag und Endetag vergleichen
+		$datumstring = ''; // Datumsstring beginnen
+		$uhrzeitstring = ''; // Datumsstring beginnen
+
+		// Startdatum und Endedatum vergleichen
 		if($startdate && $enddate)
 		{
 			if($startdate == $enddate)
 			{
-				// Start- und Endetag sind gleich
-				$content = date("d.m.Y",$startdate);
-
-				// Uhrzeit gesetzt?
-				if($addtime)
+				// Start- und Endedatum sind gleich
+				$datumstring = date("d.m.Y",$startdate);
+			}
+			else
+			{
+				// Start- und Endedatum sind ungleich
+				$start[0] = date("d",$startdate); // Starttag
+				$start[1] = date("m",$startdate); // Startmonat
+				$start[2] = date("Y",$startdate); // Startjahr
+				$ende[0] = date("d",$enddate); // Endetag
+				$ende[1] = date("m",$enddate); // Endemonat
+				$ende[2] = date("Y",$enddate); // Endejahr
+				if($start[2] == $ende[2]) 
 				{
-					$content .= ' '.date('H:i', $starttime);
+					// gleiches Jahr
+					$temp[0] = "";
+					$temp[1] = $ende[2];
 				}
-				return $content;
+				else
+				{
+					// unterschiedliches Jahr
+					$temp[0] = $start[2];
+					$temp[1] = $ende[2];
+				}
+				if($start[1] == $ende[1]) 
+				{
+					// gleicher Monat
+					$temp[1] = $ende[1].".".$temp[1];
+				}
+				else
+				{
+					// unterschiedlicher Monat
+					$temp[0] = $start[1].".".$temp[0];
+					$temp[1] = $ende[1].".".$temp[1];
+				}
+				if($start[0] == $ende[0]) 
+				{
+					// gleicher Tag
+					$temp[1] = $ende[0].".".$temp[1];
+				}
+				else
+				{
+					// unterschiedlicher Tag
+					$temp[0] = $start[0].".".$temp[0];
+					$temp[1] = $ende[0].".".$temp[1];
+				}
+				$datumstring = $temp[0]." - ".$temp[1];
 			}
-
-			$start[0] = date("d",$startdate); // Starttag
-			$start[1] = date("m",$startdate); // Startmonat
-			$start[2] = date("Y",$startdate); // Startjahr
-			$ende[0] = date("d",$enddate); // Endetag
-			$ende[1] = date("m",$enddate); // Endemonat
-			$ende[2] = date("Y",$enddate); // Endejahr
-			if($start[2] == $ende[2]) 
-			{
-				// gleiches Jahr
-				$temp[0] = "";
-				$temp[1] = $ende[2];
-			}
-			else
-			{
-				// unterschiedliches Jahr
-				$temp[0] = $start[2];
-				$temp[1] = $ende[2];
-			}
-			if($start[1] == $ende[1]) 
-			{
-				// gleicher Monat
-				$temp[1] = $ende[1].".".$temp[1];
-			}
-			else
-			{
-				// unterschiedlicher Monat
-				$temp[0] = $start[1].".".$temp[0];
-				$temp[1] = $ende[1].".".$temp[1];
-			}
-			if($start[0] == $ende[0]) 
-			{
-				// gleicher Tag
-				$temp[1] = $ende[0].".".$temp[1];
-			}
-			else
-			{
-				// unterschiedlicher Tag
-				$temp[0] = $start[0].".".$temp[0];
-				$temp[1] = $ende[0].".".$temp[1];
-			}
-			$content = $temp[0]." - ".$temp[1];
 		}
 		else
 		{
-			// Endetag ist nicht gesetzt
-			$content = date("d.m.Y",$startdate);
+			// Endedatum ist nicht gesetzt
+			$datumstring = date("d.m.Y",$startdate);
 		}
 
 		// Uhrzeit gesetzt?
 		if($addtime)
 		{
-			$content .= ' '.date('H:i', $starttime);
+			$startzeit = date('H:i', $starttime);
+			$endezeit = date('H:i', $endtime);
+			$uhrzeitstring = date('H:i', $starttime);
+			if($endezeit && ($endezeit != $startzeit))
+			{
+				$uhrzeitstring .= ' - '.date('H:i', $endtime);
+			}
 		}
 		
+		$content = '<span class="date">'.$datumstring.'</span>';
+		if($uhrzeitstring) $content .= $delimiter.' <span class="time">'.$uhrzeitstring.' Uhr </span>';
 		return $content;
 		
 	}
