@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.6.0 (2021-04-15)
+
+* Add: Funktion Helper::generateAlias (zum Bereinigen von Strings mit Umlauten und Sonderzeichen)
+
 ## Version 1.5.5 (2021-04-09)
 
 * Fix: Classes/Helper.php - Funktion getEventdate: Endezeit bei Domainfactory korrekt, bei Hetzner 01:00 - gepatcht

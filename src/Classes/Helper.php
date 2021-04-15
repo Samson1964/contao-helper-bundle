@@ -75,7 +75,7 @@ class Helper
 				$ende[0] = date("d",$enddate); // Endetag
 				$ende[1] = date("m",$enddate); // Endemonat
 				$ende[2] = date("Y",$enddate); // Endejahr
-				if($start[2] == $ende[2]) 
+				if($start[2] == $ende[2])
 				{
 					// gleiches Jahr
 					$temp[0] = "";
@@ -87,7 +87,7 @@ class Helper
 					$temp[0] = $start[2];
 					$temp[1] = $ende[2];
 				}
-				if($start[1] == $ende[1]) 
+				if($start[1] == $ende[1])
 				{
 					// gleicher Monat
 					$temp[1] = $ende[1].".".$temp[1];
@@ -98,7 +98,7 @@ class Helper
 					$temp[0] = $start[1].".".$temp[0];
 					$temp[1] = $ende[1].".".$temp[1];
 				}
-				if($start[0] == $ende[0]) 
+				if($start[0] == $ende[0])
 				{
 					// gleicher Tag
 					$temp[1] = $ende[0].".".$temp[1];
@@ -129,11 +129,11 @@ class Helper
 				$uhrzeitstring .= ' - '.date('H:i', $endtime);
 			}
 		}
-		
+
 		$content = '<span class="date">'.$datumstring.'</span>';
 		if($uhrzeitstring) $content .= $delimiter.' <span class="time">'.$uhrzeitstring.' Uhr </span>';
 		return $content;
-		
+
 	}
 
 
@@ -326,7 +326,7 @@ class Helper
 	static function sortArrayByFields($arr, $fields)
 	{
 		if(!is_array($arr)) return $arr; // Kein Array, Daten unverändert zurückgeben
-		
+
 		$sortFields = array();
 		$args       = array();
 
@@ -380,6 +380,27 @@ class Helper
 		return true; // kein ungültiges UTF-8-Zeichen gefunden
 	}
 
+	/**
+	 * Führt Contao's Slug-Generator aus, um Umlaute und Sonderzeichen zu ersetzen
+	 * siehe auch https://community.contao.org/de/showthread.php?75719-Optionen-f%C3%BCr-contao-slug
+	 * @param string    String, der geglättet werden soll
+	 * @return          fertiger String
+	 */
+	function generateAlias($string)
+	{
+		// Optionen für die Aliasgenerierung setzen
+		$slugOptionen = (object)array
+		(
+			'setValidChars' => 'a-z0-9',
+			'setLocale'     => 'de',
+			'setDelimiter'  => '-'
+		);
+		// Alias generieren
+		$varValue = \System::getContainer()->get('contao.slug')->generate($string, $slugOptionen);
+
+		return $varValue;
+	}
+
 	function ANSI_gross($eingabe)
 	{
 	# --------------------------------------------------------
@@ -407,7 +428,7 @@ class Helper
 		$ausgabe = '';
 		for ($i=0; $i<strlen($eingabe); $i++)
 			$ausgabe .= chr($mapping[ord(substr($eingabe, $i, 1))]);
-		
+
 		$umlaute = array('Ä'=>'AE', 'Æ'=>'AE', 'Å'=>'AU', 'Ö'=>'OE', 'Ø'=>'OE', 'Ü'=>'UE', 'ß'=>'SS');
 		$ausgabe = strtr($ausgabe, $umlaute);
 		return $ausgabe;
@@ -468,7 +489,7 @@ class Helper
 	}
 
 	/**
-	 * Hilfsfunktion: 
+	 * Hilfsfunktion:
 	 * Kürzt einen String auf x Zeichen
 	 *
 	 * @return string
