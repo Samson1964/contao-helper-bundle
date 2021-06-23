@@ -118,7 +118,7 @@ class Tags extends \Frontend
 				}
 				// Ersetzungen ausführen, ohne Rücksicht Groß- und Kleinschreibung
 				$verein = str_ireplace($search, $replace, $verein);
-				
+
 				// Vereinsname auf Länge trimmen, wenn gewünscht
 				if($arrSplit[2]) $verein = substr($verein, 0, $arrSplit[2]);
 				return $verein;
@@ -184,10 +184,39 @@ class Tags extends \Frontend
 
 	}
 
+	/**
+	 * Funktion getAlter
+	 *
+	 * Ermittelt das Alter in Jahren aufgrund eines (Geburts-)Datums
+	 *
+	 * @string    string       TT.MM.JJJJ oder MM.JJJJ oder JJJJ
+	 * @return    integer      Alter in Jahren
+	 */
 	function getAlter($string)
 	{
+		$col = explode('.', trim($string)); // String mit Datum zerlegen
+		if(count($col) == 1)
+		{
+			// Nur JJJJ übergeben
+			$geburtstag = $col[0].'0101';
+		}
+		elseif(count($col) == 2)
+		{
+			// Nur MM.JJJJ übergeben
+			$geburtstag = $col[1].$col[0].'01';
+		}
+		elseif(count($col) == 3)
+		{
+			// TT.MM.JJJJ übergeben
+			$geburtstag = $col[2].$col[1].$col[0];
+		}
+		else
+		{
+			return false;
+		}
+
 		$heute = date('Ymd');
-		$geburtstag = date('Ymd', mktime(0, 0, 0, (int)substr($string, 3, 2), (int)substr($string, 0, 2), (int)substr($string, 6, 4)));
+		//$geburtstag = date('Ymd', mktime(0, 0, 0, (int)substr($string, 3, 2), (int)substr($string, 0, 2), (int)substr($string, 6, 4)));
 		$alter = floor(($heute - $geburtstag) / 10000);
 		return $alter;
 	}

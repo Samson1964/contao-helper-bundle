@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.6.1 (2021-06-23)
+
+* Change: Funktion getAlter ergänzt, damit auch JJJJ oder MM.JJJJ funktioniert
+
 ## Version 1.6.0 (2021-04-15)
 
 * Add: Funktion Helper::generateAlias (zum Bereinigen von Strings mit Umlauten und Sonderzeichen)
