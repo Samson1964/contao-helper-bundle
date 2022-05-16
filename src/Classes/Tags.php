@@ -41,8 +41,16 @@ class Tags extends \Frontend
 			// Parameter angegeben?
 			if(isset($arrSplit[1]))
 			{
-				$result = self::getPlayer($arrSplit[1]);
-				return $result['dwz'];
+				// DWZ-Abfragen abgeschaltet?
+				if($GLOBALS['TL_CONFIG']['dewis_switchedOff'])
+				{
+					return '';
+				}
+				else
+				{
+					$result = self::getPlayer($arrSplit[1]);
+					return $result['dwz'];
+				}
 			}
 			else
 			{
@@ -56,8 +64,16 @@ class Tags extends \Frontend
 			// Parameter angegeben?
 			if(isset($arrSplit[1]))
 			{
-				$result = self::getPlayer($arrSplit[1]);
-				return $result['elo'];
+				// DWZ-Abfragen abgeschaltet?
+				if($GLOBALS['TL_CONFIG']['dewis_switchedOff'])
+				{
+					return '';
+				}
+				else
+				{
+					$result = self::getPlayer($arrSplit[1]);
+					return $result['elo'];
+				}
 			}
 			else
 			{
@@ -71,25 +87,33 @@ class Tags extends \Frontend
 			// Parameter angegeben?
 			if(isset($arrSplit[1]))
 			{
-				$result = self::getPlayer($arrSplit[1]);
-				$titel = $result['titel'];
-				// Lange Version des Titel ausgeben, wenn Parameter lang gesetzt ist
-				if(isset($arrSplit[2]) && $arrSplit[2] = 'lang')
+				// DWZ-Abfragen abgeschaltet?
+				if($GLOBALS['TL_CONFIG']['dewis_switchedOff'])
 				{
-					switch($titel)
-					{
-						case 'GM': $titel = 'Großmeister'; break;
-						case 'WGM': $titel = 'Großmeisterin'; break;
-						case 'IM': $titel = 'Internationaler Meister'; break;
-						case 'WIM': $titel = 'Internationale Meisterin'; break;
-						case 'FM': $titel = 'FIDE-Meister'; break;
-						case 'WFM': $titel = 'FIDE-Meisterin'; break;
-						case 'CM': $titel = 'Kandidatenmeister'; break;
-						case 'WCM': $titel = 'Kandidatenmeisterin'; break;
-						default:
-					}
+					return '';
 				}
-				return $titel;
+				else
+				{
+					$result = self::getPlayer($arrSplit[1]);
+					$titel = $result['titel'];
+					// Lange Version des Titel ausgeben, wenn Parameter lang gesetzt ist
+					if(isset($arrSplit[2]) && $arrSplit[2] = 'lang')
+					{
+						switch($titel)
+						{
+							case 'GM': $titel = 'Großmeister'; break;
+							case 'WGM': $titel = 'Großmeisterin'; break;
+							case 'IM': $titel = 'Internationaler Meister'; break;
+							case 'WIM': $titel = 'Internationale Meisterin'; break;
+							case 'FM': $titel = 'FIDE-Meister'; break;
+							case 'WFM': $titel = 'FIDE-Meisterin'; break;
+							case 'CM': $titel = 'Kandidatenmeister'; break;
+							case 'WCM': $titel = 'Kandidatenmeisterin'; break;
+							default:
+						}
+					}
+					return $titel;
+				}
 			}
 			else
 			{
@@ -103,25 +127,33 @@ class Tags extends \Frontend
 			// Parameter angegeben?
 			if(isset($arrSplit[1]))
 			{
-				$result = self::getPlayer($arrSplit[1]);
-				$verein = $result['verein'];
-
-				// Vereinsname kürzen
-				$replaces = (array)unserialize($GLOBALS['TL_CONFIG']['insert_verein_replaces']); // Ersetzungen aus Einstellungen laden
-				// + durch Leerzeichen ersetzen und Zielarrays füllen
-				$search = array();
-				$replace = array();
-				for($x = 0; $x < count($replaces); $x++)
+				// DWZ-Abfragen abgeschaltet?
+				if($GLOBALS['TL_CONFIG']['dewis_switchedOff'])
 				{
-					$search[] = str_replace('+', ' ', $replaces[$x]['search']);
-					$replace[] = str_replace('+', ' ', $replaces[$x]['replace']);
+					return '';
 				}
-				// Ersetzungen ausführen, ohne Rücksicht Groß- und Kleinschreibung
-				$verein = str_ireplace($search, $replace, $verein);
-
-				// Vereinsname auf Länge trimmen, wenn gewünscht
-				if($arrSplit[2]) $verein = substr($verein, 0, $arrSplit[2]);
-				return $verein;
+				else
+				{
+					$result = self::getPlayer($arrSplit[1]);
+					$verein = $result['verein'];
+                	
+					// Vereinsname kürzen
+					$replaces = (array)unserialize($GLOBALS['TL_CONFIG']['insert_verein_replaces']); // Ersetzungen aus Einstellungen laden
+					// + durch Leerzeichen ersetzen und Zielarrays füllen
+					$search = array();
+					$replace = array();
+					for($x = 0; $x < count($replaces); $x++)
+					{
+						$search[] = str_replace('+', ' ', $replaces[$x]['search']);
+						$replace[] = str_replace('+', ' ', $replaces[$x]['replace']);
+					}
+					// Ersetzungen ausführen, ohne Rücksicht Groß- und Kleinschreibung
+					$verein = str_ireplace($search, $replace, $verein);
+                	
+					// Vereinsname auf Länge trimmen, wenn gewünscht
+					if($arrSplit[2]) $verein = substr($verein, 0, $arrSplit[2]);
+					return $verein;
+				}
 			}
 			else
 			{

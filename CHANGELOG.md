@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.6.2 (2022-05-16)
+
+* Add: Abfrage, ob das Dewis-Bundle abgeschaltet ist. Falls ja, wird ein Leerstring bei den Tags zurückgeliefert. Verhindert fatal Error "Could not connect to host" bei Nichterreichbarkeit svw.info.
+
 ## Version 1.6.1 (2021-06-23)
 
 * Change: Funktion getAlter ergänzt, damit auch JJJJ oder MM.JJJJ funktioniert
