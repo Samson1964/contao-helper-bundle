@@ -55,9 +55,9 @@ class Cache
 			}
 			else if(is_array($config))
 			{
-				$this->setCache($config['name']);
-				$this->setCachePath($config['path']);
-				$this->setExtension($config['extension']);
+				if(isset($config['name'])) $this->setCache($config['name']);
+				if(isset($config['path'])) $this->setCachePath($config['path']);
+				if(isset($config['extension'])) $this->setExtension($config['extension']);
 			}
 		}
 	}
