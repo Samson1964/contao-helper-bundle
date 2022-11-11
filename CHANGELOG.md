@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.6.3 (2022-11-11)
+
+* Change: Abhängigkeit PHP-Version aufgehoben
+
 ## Version 1.6.2 (2022-05-16)
 
 * Add: Abfrage, ob das Dewis-Bundle abgeschaltet ist. Falls ja, wird ein Leerstring bei den Tags zurückgeliefert. Verhindert fatal Error "Could not connect to host" bei Nichterreichbarkeit svw.info.
