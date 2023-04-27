@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.7.0 (2024-04-27)
+
+* Add: Zeitmessung-Klasse
+
 ## Version 1.6.4 (2022-11-11)
 
 * Fix: Warning in PHP 8: Undefined array key "path" in Classes/Cache:59
