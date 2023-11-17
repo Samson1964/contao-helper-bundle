@@ -72,7 +72,7 @@ class Tags extends \Frontend
 				else
 				{
 					$result = self::getPlayer($arrSplit[1]);
-					return $result['elo'];
+					return '<a href="http://ratings.fide.com/profile/'.$result['fideid'].'" target="_blank">'.$result['elo'].'</a>';
 				}
 			}
 			else
@@ -136,7 +136,7 @@ class Tags extends \Frontend
 				{
 					$result = self::getPlayer($arrSplit[1]);
 					$verein = $result['verein'];
-                	
+
 					// Vereinsname kürzen
 					$replaces = (array)unserialize($GLOBALS['TL_CONFIG']['insert_verein_replaces']); // Ersetzungen aus Einstellungen laden
 					// + durch Leerzeichen ersetzen und Zielarrays füllen
@@ -149,7 +149,7 @@ class Tags extends \Frontend
 					}
 					// Ersetzungen ausführen, ohne Rücksicht Groß- und Kleinschreibung
 					$verein = str_ireplace($search, $replace, $verein);
-                	
+
 					// Vereinsname auf Länge trimmen, wenn gewünscht
 					if($arrSplit[2]) $verein = substr($verein, 0, $arrSplit[2]);
 					return $verein;
@@ -284,12 +284,14 @@ class Tags extends \Frontend
 			$dwz = $result->member->rating;
 			$elo = $result->member->elo;
 			$titel = $result->member->fideTitle;
+			$fideid = $result->member->idfide;
 			$verein = $result->memberships[0]->club;
 			return array
 			(
 				'dwz'    => $dwz,
 				'elo'    => $elo,
 				'titel'  => $titel,
+				'fideid' => $fideid,
 				'verein' => $verein
 			);
 		}

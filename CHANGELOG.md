@@ -1,6 +1,10 @@
 # Hilfsfunktionen Changelog
 
-## Version 1.7.0 (2024-04-27)
+## Version 1.7.1 (2023-11-17)
+
+* Change: elo-Inserttag ist jetzt verlinkt mit der FIDE-Karteikarte
+
+## Version 1.7.0 (2023-04-27)
 
 * Add: Zeitmessung-Klasse
 
