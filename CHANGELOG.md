@@ -1,5 +1,10 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.7.2 (2024-04-10)
+
+* Change: Verbesserungen der Form-Klasse
+* Add: Klasse Alter, um zu einem Datum das Alter in Jahren zurückzugeben
+
 ## Version 1.7.1 (2023-11-17)
 
 * Change: elo-Inserttag ist jetzt verlinkt mit der FIDE-Karteikarte

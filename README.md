@@ -66,3 +66,11 @@ Falls die Klasse in einer Erweiterung angewendet wird, so muß ggfs. ein Eintrag
 
 ?>
 ```
+## Alter berechnen
+
+```php
+<?php
+    // Parameter $string: TT.MM.JJJJ oder MM.JJJJ oder JJJJ
+    $alter = \Schachbulle\ContaoHelperBundle\Classes\Alter::Jahre($string);
+?>
+```

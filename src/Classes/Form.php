@@ -47,7 +47,7 @@ class Form
 				break;
 			case 'submit':
 				$string = '<div class="widget widget-submit">';
-				$string .= '<button type="submit" id="'.$arrParam['name'].'" class="submit '.$arrParam['class']. '">'.$arrParam['label'].'</button>';
+				$string .= '<button type="submit" id="'.$arrParam['name'].'" value="'.$arrParam['value'].'" class="submit '.$arrParam['class']. '">'.$arrParam['label'].'</button>';
 				$string .= '</div>';
 				break;
 			case 'textarea':
@@ -72,16 +72,8 @@ class Form
 				break;
 			case 'checkbox':
 				$string = '<div class="widget widget-checkbox '.$arrParam['class'].'">';
-				$string .= '<label for="'.$arrParam['name'].'">'.$arrParam['label'].'##mandatory##</label>';
-				if($arrParam['options'])
-				{
-					foreach($arrParam['options'] as $key => $value)
-					{
-						$string .= '<li><label>';
-						$string .= '<input type="checkbox" name="'.$arrParam['name'].'[]" class="checkbox '.$arrParam['class']. '" value="'.$key.'">';
-						$string .= $value.'</label></li>';
-					}
-				}
+				$string .= '<input type="checkbox" name="'.$arrParam['name'].'" class="checkbox '.$arrParam['class']. '" value="'.$arrParam['value'].'">';
+				$string .= '&nbsp;<label for="'.$arrParam['name'].'">'.$arrParam['label'].'##mandatory##</label>';
 				$string .= '</div>';
 				break;
 		}
