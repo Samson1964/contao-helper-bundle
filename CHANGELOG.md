@@ -1,5 +1,11 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.7.3 (2025-03-14)
+
+* Fix: PHP Warning array_multisort(): Argument #1 is expected to be an array or a sort flag in Helper.php on line 360
+* Fix: PHP-Warnung in Tags.php
+* Add: Cache-Unterstützung in Funktion getPlayer in Klasse Tags
+
 ## Version 1.7.2 (2024-04-10)
 
 * Change: Verbesserungen der Form-Klasse

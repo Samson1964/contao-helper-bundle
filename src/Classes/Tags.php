@@ -151,7 +151,7 @@ class Tags extends \Frontend
 					$verein = str_ireplace($search, $replace, $verein);
 
 					// Vereinsname auf Länge trimmen, wenn gewünscht
-					if($arrSplit[2]) $verein = substr($verein, 0, $arrSplit[2]);
+					if(isset($arrSplit[2])) $verein = substr($verein, 0, $arrSplit[2]);
 					return $verein;
 				}
 			}
@@ -257,6 +257,16 @@ class Tags extends \Frontend
 	{
 		try
 		{
+			$cache = new \Schachbulle\ContaoHelperBundle\Classes\Cache('getPlayer'); // Cache aktivieren
+			$cache->eraseExpired(); // Abgelaufene Schlüssel löschen
+			// Cachedaten der Spieler-ID laden
+			if($cache->isCached($id))
+			{
+				// im Cache vorhanden
+				$daten = $cache->retrieve($id);
+				return $daten;
+			}
+
 			$context = stream_context_create([
 				'ssl' => [
 					'verify_peer' => false,
@@ -286,7 +296,7 @@ class Tags extends \Frontend
 			$titel = $result->member->fideTitle;
 			$fideid = $result->member->idfide;
 			$verein = $result->memberships[0]->club;
-			return array
+			$daten = array
 			(
 				'dwz'    => $dwz,
 				'elo'    => $elo,
@@ -294,6 +304,8 @@ class Tags extends \Frontend
 				'fideid' => $fideid,
 				'verein' => $verein
 			);
+			$cache->store($id, $daten, 86400); // Daten im Cache 24h speichern
+			return $daten;
 		}
 		catch (SOAPFault $f)
 		{

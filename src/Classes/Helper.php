@@ -357,7 +357,7 @@ class Helper
 
 		$args[] = &$arr;
 
-		call_user_func_array('array_multisort', $args);
+		if(is_array($args)) call_user_func_array('array_multisort', $args);
 
 		return $arr;
 	}
