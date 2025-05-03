@@ -1,5 +1,14 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.8.0 (2025-05-03)
+
+* Fix: Warning: Undefined array key "mandatory" in src/Classes/Form.php (line 81) 
+* Fix: Warning: Undefined array key "name" in src/Classes/Form.php (line 28) 
+* Fix: Warning: Undefined array key "label" in src/Classes/Form.php (line 71) 
+* Fix: Warning: Undefined variable $string in src/Classes/Form.php:65
+* Add: Form-Klasse Input-Feld fieldset
+* Add: Form-Klasse Select-Feld um optgroup erweitert
+
 ## Version 1.7.3 (2025-03-14)
 
 * Fix: PHP Warning array_multisort(): Argument #1 is expected to be an array or a sort flag in Helper.php on line 360

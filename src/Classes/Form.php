@@ -11,7 +11,7 @@ class Form
 	var $enctype;
 	var $fields;
 	var $formdata;
-	var $mandatory = '<span class="mandatory">*</span>';
+	var $mandatory = '<span class="mandatory">* Pflichtfeld</span>';
 
 	function __construct($action="", $method="POST", $enctype="multipart/form-data")
 	{
@@ -25,6 +25,14 @@ class Form
 	function addField($arrParam)
 	{
 
+		// Variablen initialisieren
+		if(!isset($arrParam['name'])) $arrParam['name'] = '';
+		if(!isset($arrParam['value'])) $arrParam['value'] = '';
+		if(!isset($arrParam['class'])) $arrParam['class'] = '';
+		if(!isset($arrParam['label'])) $arrParam['label'] = '';
+		if(!isset($arrParam['rows'])) $arrParam['rows'] = '';
+		if(!isset($arrParam['cols'])) $arrParam['cols'] = '';
+
 		$this->fields[] = $arrParam['name'];
 
 		// Wenn POST-Daten da sind, dann als value eintragen, ansonsten Formularvorgabewert nehmen
@@ -33,6 +41,11 @@ class Form
 
 		switch($arrParam['typ'])
 		{
+			case 'fieldset':
+				// typ = fieldset
+				// label = wenn leer, wird das fieldset beendet, ansonsten begonnen
+				$string = $arrParam['label'] ? '<fieldset><legend>'.$arrParam['label'].'</legend>' : '</fieldset>';
+				break;
 			case 'hidden':
 				$string = '<input type="hidden" name="'.$arrParam['name'].'" value="'.$arrParam['value'].'">';
 				break;
@@ -51,7 +64,7 @@ class Form
 				$string .= '</div>';
 				break;
 			case 'textarea':
-				$string .= '<div class="widget widget-textarea">';
+				$string = '<div class="widget widget-textarea">';
 				$string .= '<label for="'.$arrParam['name'].'">'.$arrParam['label'].'##mandatory##</label>';
 				$string .= '<textarea name="'.$arrParam['name'].'" id="'.$arrParam['name'].'" class="textarea '.$arrParam['class']. '" rows="'.$arrParam['rows'].'" cols="'.$arrParam['cols'].'"##required##>'.$value.'</textarea>';
 				$string .= '</div>';
@@ -60,11 +73,33 @@ class Form
 				$string = '<div class="widget widget-select '.$arrParam['class'].'">';
 				$string .= '<label for="'.$arrParam['name'].'">'.$arrParam['label'].'##mandatory##</label>';
 				$string .= '<select name="'.$arrParam['name'].'" id="'.$arrParam['name'].'" class="select '.$arrParam['class'].'"##required##>';
+				$tiefe = self::arrayTiefe($arrParam['options']);
+				//echo '<pre>';
+				//print_r($arrParam['options']);
+				//echo $tiefe;
+				//echo '</pre>';
 				if($arrParam['options'])
 				{
-					foreach($arrParam['options'] as $key => $value)
+					// Array mit Gruppennamen
+					if($tiefe > 1)
 					{
-						$string .= '<option value="'.$key.'">'.$value.'</option>';
+						foreach($arrParam['options'] as $gruppenname => $turnier)
+						{
+							$string .= '<optgroup label="'.$gruppenname.'">';
+							foreach($arrParam['options'][$gruppenname] as $key => $value)
+							{
+								$string .= '<option value="'.$key.'">'.$value.'</option>';
+							}
+							$string .= '</optgroup>';
+						}
+					}
+					// Array ohne Gruppennamen
+					else
+					{
+						foreach($arrParam['options'] as $key => $value)
+						{
+							$string .= '<option value="'.$key.'">'.$value.'</option>';
+						}
 					}
 				}
 				$string .= '</select>';
@@ -78,7 +113,7 @@ class Form
 				break;
 		}
 		// Pflichtfelder ersetzen
-		if($arrParam['mandatory'])
+		if(isset($arrParam['mandatory']))
 		{
 			$string = str_replace('##mandatory##', $this->mandatory, $string);
 			$string = str_replace('##required##', ' required', $string);
@@ -115,4 +150,31 @@ class Form
 	{
 		return $this->formdata;
 	}
+
+	/**
+	 * Funktion arrayTiefe
+	 * =======================
+	 * Ermittelt die Verschachtelungstiefe eines Arrays
+	 * Diese Funktion verwendet Rekursion, um die Tiefe des Arrays zu ermitteln. Zunächst wird die Variable $max_ Depth auf 1 initialisiert. Dann durchläuft es das Array und prüft, ob jeder Wert ein Array ist. Wenn dies der Fall ist, ruft es die Funktion rekursiv auf, um die Tiefe des Subarrays abzurufen und zu bestimmen, ob die Tiefe des Subarrays größer als $max_ Depth ist. Wenn dies der Fall ist, wird die Variable $max_ Depth auf eine tiefere Tiefe aktualisiert. Schließlich geben wir die Variable $max_ Depth zurück, die die Tiefe des Arrays darstellt. 
+	 *
+	 * @return array
+	 */
+	function arrayTiefe($array) 
+	{
+	
+		$max_depth = 1;
+		foreach($array as $value) 
+		{
+			if(is_array($value)) 
+			{
+				$depth = self::arrayTiefe($value) + 1;
+				if ($depth > $max_depth) 
+				{
+					$max_depth = $depth;
+				}
+			}
+		}
+		return $max_depth;
+	}
+	
 }
