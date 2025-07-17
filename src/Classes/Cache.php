@@ -119,7 +119,7 @@ class Cache
 		$cachedData = $this->_loadCache();
 		(false === $timestamp) ? $type = 'data' : $type = 'time';
 		if(!isset($cachedData[$key][$type])) return null;
-		return unserialize($cachedData[$key][$type]);
+		return @unserialize($cachedData[$key][$type]);
 	}
 
 	/**

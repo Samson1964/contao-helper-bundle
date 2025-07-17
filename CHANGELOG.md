@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.8.1 (2025-07-17)
+
+* Fix: Warning: unserialize(): Error at offset 0 of 10 bytes in src/Classes/Cache.php (line 122) -> unserialize in @unserialize
+
 ## Version 1.8.0 (2025-05-03)
 
 * Fix: Warning: Undefined array key "mandatory" in src/Classes/Form.php (line 81) 
