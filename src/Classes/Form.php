@@ -105,6 +105,36 @@ class Form
 				$string .= '</select>';
 				$string .= '</div>';
 				break;
+			case 'radio':
+				$string = '<div class="widget widget-select '.$arrParam['class'].'">';
+				$string .= '<label for="'.$arrParam['name'].'">'.$arrParam['label'].'##mandatory##</label>';
+				$tiefe = self::arrayTiefe($arrParam['options']);
+				if($arrParam['options'])
+				{
+					// Array mit Gruppennamen
+					if($tiefe > 1)
+					{
+						foreach($arrParam['options'] as $gruppenname => $turnier)
+						{
+							$string .= '<p><b>'.$gruppenname.'</b></p>';
+							foreach($arrParam['options'][$gruppenname] as $key => $value)
+							{
+								$string .= '<input type="radio" name="'.$arrParam['name'].'" id="turnier'.$key.'" class="radio '.$arrParam['class'].'" value="'.$key.'"> <label for="turnier'.$key.'">'.$value.'</label>';
+							}
+						}
+					}
+					// Array ohne Gruppennamen
+					else
+					{
+						foreach($arrParam['options'] as $key => $value)
+						{
+							$string .= '<input type="radio" name="'.$arrParam['name'].'" id="turnier'.$key.'" class="radio '.$arrParam['class'].'" value="'.$key.'"> <label for="turnier'.$key.'">'.$value.'</label>';
+						}
+					}
+				}
+				$string .= '</div>';
+				break;
+
 			case 'checkbox':
 				$string = '<div class="widget widget-checkbox '.$arrParam['class'].'">';
 				$string .= '<input type="checkbox" name="'.$arrParam['name'].'" class="checkbox '.$arrParam['class']. '" value="'.$arrParam['value'].'">';
