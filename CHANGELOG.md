@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.8.3 (2025-07-22)
+
+* Add: Form-Klasse -> Zeilenumbruch bei den Radio-Buttons
+
 ## Version 1.8.2 (2025-07-18)
 
 * Add: Form select

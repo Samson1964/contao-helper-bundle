@@ -119,7 +119,7 @@ class Form
 							$string .= '<p><b>'.$gruppenname.'</b></p>';
 							foreach($arrParam['options'][$gruppenname] as $key => $value)
 							{
-								$string .= '<input type="radio" name="'.$arrParam['name'].'" id="turnier'.$key.'" class="radio '.$arrParam['class'].'" value="'.$key.'"> <label for="turnier'.$key.'">'.$value.'</label>';
+								$string .= '<input type="radio" name="'.$arrParam['name'].'" id="turnier'.$key.'" class="radio '.$arrParam['class'].'" value="'.$key.'"> <label for="turnier'.$key.'">'.$value.'</label><br>';
 							}
 						}
 					}
@@ -128,7 +128,7 @@ class Form
 					{
 						foreach($arrParam['options'] as $key => $value)
 						{
-							$string .= '<input type="radio" name="'.$arrParam['name'].'" id="turnier'.$key.'" class="radio '.$arrParam['class'].'" value="'.$key.'"> <label for="turnier'.$key.'">'.$value.'</label>';
+							$string .= '<input type="radio" name="'.$arrParam['name'].'" id="turnier'.$key.'" class="radio '.$arrParam['class'].'" value="'.$key.'"> <label for="turnier'.$key.'">'.$value.'</label><br>';
 						}
 					}
 				}
@@ -185,7 +185,7 @@ class Form
 	 * Funktion arrayTiefe
 	 * =======================
 	 * Ermittelt die Verschachtelungstiefe eines Arrays
-	 * Diese Funktion verwendet Rekursion, um die Tiefe des Arrays zu ermitteln. Zunächst wird die Variable $max_ Depth auf 1 initialisiert. Dann durchläuft es das Array und prüft, ob jeder Wert ein Array ist. Wenn dies der Fall ist, ruft es die Funktion rekursiv auf, um die Tiefe des Subarrays abzurufen und zu bestimmen, ob die Tiefe des Subarrays größer als $max_ Depth ist. Wenn dies der Fall ist, wird die Variable $max_ Depth auf eine tiefere Tiefe aktualisiert. Schließlich geben wir die Variable $max_ Depth zurück, die die Tiefe des Arrays darstellt. 
+	 * Diese Funktion verwendet Rekursion, um die Tiefe des Arrays zu ermitteln. ZunÃ¤chst wird die Variable $max_ Depth auf 1 initialisiert. Dann durchlÃ¤uft es das Array und prÃ¼ft, ob jeder Wert ein Array ist. Wenn dies der Fall ist, ruft es die Funktion rekursiv auf, um die Tiefe des Subarrays abzurufen und zu bestimmen, ob die Tiefe des Subarrays grÃ¶ÃŸer als $max_ Depth ist. Wenn dies der Fall ist, wird die Variable $max_ Depth auf eine tiefere Tiefe aktualisiert. SchlieÃŸlich geben wir die Variable $max_ Depth zurÃ¼ck, die die Tiefe des Arrays darstellt. 
 	 *
 	 * @return array
 	 */
