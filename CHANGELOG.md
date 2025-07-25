@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.8.4 (2025-07-25)
+
+* Change: Form-Klasse radio-Element -> Korrekturen CSS-Klasse plus zusätzliche div-Container
+
 ## Version 1.8.3 (2025-07-22)
 
 * Add: Form-Klasse -> Zeilenumbruch bei den Radio-Buttons

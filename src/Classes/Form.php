@@ -106,7 +106,7 @@ class Form
 				$string .= '</div>';
 				break;
 			case 'radio':
-				$string = '<div class="widget widget-select '.$arrParam['class'].'">';
+				$string = '<div class="widget widget-radio '.$arrParam['class'].'">';
 				$string .= '<label for="'.$arrParam['name'].'">'.$arrParam['label'].'##mandatory##</label>';
 				$tiefe = self::arrayTiefe($arrParam['options']);
 				if($arrParam['options'])
@@ -117,19 +117,23 @@ class Form
 						foreach($arrParam['options'] as $gruppenname => $turnier)
 						{
 							$string .= '<p><b>'.$gruppenname.'</b></p>';
+							$string .= '<div class="radio-group">';
 							foreach($arrParam['options'][$gruppenname] as $key => $value)
 							{
-								$string .= '<input type="radio" name="'.$arrParam['name'].'" id="turnier'.$key.'" class="radio '.$arrParam['class'].'" value="'.$key.'"> <label for="turnier'.$key.'">'.$value.'</label><br>';
+								$string .= '<div class="radio-item"><input type="radio" name="'.$arrParam['name'].'" id="turnier'.$key.'" class="radio '.$arrParam['class'].'" value="'.$key.'"> <label for="turnier'.$key.'">'.$value.'</label><div>';
 							}
+							$string .= '</div>';
 						}
 					}
 					// Array ohne Gruppennamen
 					else
 					{
+						$string .= '<div class="radio-group">';
 						foreach($arrParam['options'] as $key => $value)
 						{
-							$string .= '<input type="radio" name="'.$arrParam['name'].'" id="turnier'.$key.'" class="radio '.$arrParam['class'].'" value="'.$key.'"> <label for="turnier'.$key.'">'.$value.'</label><br>';
+							$string .= '<div class="radio-item"><input type="radio" name="'.$arrParam['name'].'" id="turnier'.$key.'" class="radio '.$arrParam['class'].'" value="'.$key.'"> <label for="turnier'.$key.'">'.$value.'</label></div>';
 						}
+						$string .= '</div>';
 					}
 				}
 				$string .= '</div>';
