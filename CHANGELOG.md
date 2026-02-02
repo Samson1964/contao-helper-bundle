@@ -1,5 +1,11 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.8.5 (2026-02-02)
+
+* Add: Chosen in der Form-Klasse -> Javascript funktioniert noch nicht
+* Fix: Form-Klasse -> ##required## fehlte bei Radio-Button
+* Add: form.css
+
 ## Version 1.8.4 (2025-07-25)
 
 * Change: Form-Klasse radio-Element -> Korrekturen CSS-Klasse plus zusätzliche div-Container

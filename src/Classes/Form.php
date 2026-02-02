@@ -8,6 +8,7 @@ class Form
 	var $action;
 	var $method;
 	var $content;
+	var $chosen;
 	var $enctype;
 	var $fields;
 	var $formdata;
@@ -18,8 +19,10 @@ class Form
 		$this->action = $action;
 		$this->method = $method;
 		$this->enctype = $enctype;
+		$this->chosen = '';
 		$this->fields = array();
 		$this->content = '<form action="'.$action.'" method="'.$method.'" enctype="'.$enctype.'"><div class="formbody">';
+		$GLOBALS['TL_CSS'][] = 'bundles/contaohelper/css/form.css';
 	}
 
 	function addField($arrParam)
@@ -32,6 +35,13 @@ class Form
 		if(!isset($arrParam['label'])) $arrParam['label'] = '';
 		if(!isset($arrParam['rows'])) $arrParam['rows'] = '';
 		if(!isset($arrParam['cols'])) $arrParam['cols'] = '';
+		if(!isset($arrParam['chosen'])) $arrParam['chosen'] = false;
+
+		if($arrParam['chosen'])
+		{
+			$this->chosen .= '$(".chosen-'.$arrParam['name'].'").chosen();'."\n";
+			$arrParam['class'] .= ' '.($arrParam['chosen']) ? 'chosen-'.$arrParam['name'] : '';
+		}
 
 		$this->fields[] = $arrParam['name'];
 
@@ -96,6 +106,7 @@ class Form
 					// Array ohne Gruppennamen
 					else
 					{
+						$string .= '<option value="">-</option>';
 						foreach($arrParam['options'] as $key => $value)
 						{
 							$string .= '<option value="'.$key.'">'.$value.'</option>';
@@ -120,7 +131,7 @@ class Form
 							$string .= '<div class="radio-group">';
 							foreach($arrParam['options'][$gruppenname] as $key => $value)
 							{
-								$string .= '<div class="radio-item"><input type="radio" name="'.$arrParam['name'].'" id="turnier'.$key.'" class="radio '.$arrParam['class'].'" value="'.$key.'"> <label for="turnier'.$key.'">'.$value.'</label><div>';
+								$string .= '<div class="radio-item"><input type="radio" name="'.$arrParam['name'].'" id="turnier'.$key.'" class="radio '.$arrParam['class'].'" value="'.$key.'"##required##> <label for="turnier'.$key.'">'.$value.'</label><div>';
 							}
 							$string .= '</div>';
 						}
@@ -131,7 +142,7 @@ class Form
 						$string .= '<div class="radio-group">';
 						foreach($arrParam['options'] as $key => $value)
 						{
-							$string .= '<div class="radio-item"><input type="radio" name="'.$arrParam['name'].'" id="turnier'.$key.'" class="radio '.$arrParam['class'].'" value="'.$key.'"> <label for="turnier'.$key.'">'.$value.'</label></div>';
+							$string .= '<div class="radio-item"><input type="radio" name="'.$arrParam['name'].'" id="turnier'.$key.'" class="radio '.$arrParam['class'].'" value="'.$key.'"##required##> <label for="turnier'.$key.'">'.$value.'</label></div>';
 						}
 						$string .= '</div>';
 					}
@@ -150,19 +161,30 @@ class Form
 		if(isset($arrParam['mandatory']))
 		{
 			$string = str_replace('##mandatory##', $this->mandatory, $string);
-			$string = str_replace('##required##', ' required', $string);
+			$string = str_replace('##required##', ' required="required"', $string);
 		}
 		else
 		{
 			$string = str_replace('##mandatory##', '', $string);
 			$string = str_replace('##required##', '', $string);
 		}
+
+		// Formular zurückgeben
 		$this->content .= $string;
 	}
 
 	function generate()
 	{
-		return $this->content .= '</div></form>';
+		// Chosen einbinden
+		if($this->chosen)
+		{
+			//$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaohelper/chosen/chosen.jquery.min.js';
+			//$GLOBALS['TL_CSS'][] = 'bundles/contaohelper/chosen/chosen.min.css';
+			$chosen_js = '<script>$(function() { '.$this->chosen.' });</script>';
+		}
+		else $chosen_js = '';
+
+		return $this->content = $chosen_js.$this->content.'</div></form>';
 	}
 
 	function validate()
