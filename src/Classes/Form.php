@@ -152,7 +152,7 @@ class Form
 
 			case 'checkbox':
 				$string = '<div class="widget widget-checkbox '.$arrParam['class'].'">';
-				$string .= '<input type="checkbox" name="'.$arrParam['name'].'" class="checkbox '.$arrParam['class']. '" value="'.$arrParam['value'].'">';
+				$string .= '<input type="checkbox" name="'.$arrParam['name'].'" class="checkbox '.$arrParam['class']. '" value="'.$arrParam['value'].'"##required##>';
 				$string .= '&nbsp;<label for="'.$arrParam['name'].'">'.$arrParam['label'].'##mandatory##</label>';
 				$string .= '</div>';
 				break;

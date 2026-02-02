@@ -1,5 +1,9 @@
 # Hilfsfunktionen Changelog
 
+## Version 1.8.6 (2026-02-02)
+
+* Fix: Form-Klasse -> ##required## fehlte bei Checkbox
+
 ## Version 1.8.5 (2026-02-02)
 
 * Add: Chosen in der Form-Klasse -> Javascript funktioniert noch nicht
